@@ -45,11 +45,20 @@ palette = {
 }
 
 function love.load()
-    for y = 0, HEIGHT do
+    for y = 1, HEIGHT do
         pixels[y] = {}
-        for x = 0, WIDTH do
-            pixels[y][x] = love.math.random() * (table.maxn(palette) - 1) + 1
+        for x = 1, WIDTH do
+            -- uncomment for random starting point
+            -- pixels[y][x] = love.math.random() * (table.maxn(palette) - 1) + 1
+
+            -- init screen to black
+            pixels[y][x] = 1
         end
+    end
+
+    for x = 1, WIDTH do
+        -- bottom pixels start at white
+        pixels[HEIGHT][x] = table.maxn(palette)
     end
 
     for i, v in ipairs(palette) do
@@ -58,11 +67,11 @@ function love.load()
 end
 
 function love.draw()
-    for y = 0, HEIGHT do
-        for x = 0, WIDTH do
+    for y = 1, HEIGHT do
+        for x = 1, WIDTH do
             color = math.floor(pixels[y][x])
             love.graphics.setColor(palette[color][1], palette[color][2], palette[color][3], 1)
-            love.graphics.rectangle('fill', x * PWIDTH, y * PHEIGHT, PWIDTH, PHEIGHT)
+            love.graphics.rectangle('fill', (x-1) * PWIDTH, (y-1) * PHEIGHT - 1, PWIDTH, PHEIGHT)
         end
     end
 end
