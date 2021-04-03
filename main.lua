@@ -76,5 +76,29 @@ function love.draw()
     end
 end
 
+-- function doFire() {
+--     for(x = 0 ; x < FIRE_WIDTH; x++) {
+--         for (y = 1; y < FIRE_HEIGHT ; y++) {
+--             spreadFire(y * FIRE_WIDTH + x);
+--         }
+--     }
+--  }
+function doFire()
+    for y = 2, HEIGHT do
+        for x = 1, WIDTH do
+            spreadFire(x, y)
+        end
+    end
+end
+
+--  function spreadFire(from) {
+--     var to = from - FIRE_WIDTH;
+--     firePixels[to] = firePixels[from] - 1;
+--  }
+function spreadFire(x,y)
+    pixels[y-1][x] = math.max(1, pixels[y][x] - 1);
+end
+
 function love.update(dt)
+    doFire()
 end
