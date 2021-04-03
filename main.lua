@@ -1,7 +1,10 @@
+-- Implementation of fire from Doom
+-- As described by https://fabiensanglard.net/doom_fire_psx/index.html
+
 local bit = require("bit")
 
-WIDTH = 100
-HEIGHT = 100
+WIDTH = 200
+HEIGHT = 200
 PWIDTH = love.graphics.getWidth() / WIDTH
 PHEIGHT = love.graphics.getHeight() / HEIGHT
 pixels = {}
@@ -63,6 +66,7 @@ function love.load()
     end
 
     for i, v in ipairs(palette) do
+        -- convert palette from "bytes" to floats
         palette[i] = {v[1]/255, v[2]/255, v[3]/255}
     end
 end
@@ -91,5 +95,18 @@ function spreadFire(x,y)
 end
 
 function love.update(dt)
+    if love.keyboard.isDown('space')
+    then
+        for x = 1, WIDTH do
+            -- turn off generator line
+            pixels[HEIGHT][x] = 1
+        end
+    else
+        for x = 1, WIDTH do
+            -- turn generator line back on
+            pixels[HEIGHT][x] = table.maxn(palette)
+        end
+    end
+
     doFire()
 end
