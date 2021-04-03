@@ -87,7 +87,7 @@ end
 
 function spreadFire(x,y)
     rand = bit.band(math.floor(math.random() * 3), 3);
-    pixels[y-1][x] = math.max(1, pixels[y][x] - bit.band(1, rand));
+    pixels[y-1][x - rand + 1] = math.max(1, pixels[y][x] - bit.band(1, rand));
 end
 
 function love.update(dt)
