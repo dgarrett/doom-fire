@@ -49,6 +49,8 @@ palette = {
 }
 
 function love.load()
+    love.window.setTitle('Doom Fire')
+
     for y = 1, HEIGHT do
         pixels[y] = {}
         for x = 1, WIDTH do
