@@ -92,7 +92,7 @@ function doFire()
 end
 
 function spreadFire(x,y)
-    rand = bit.band(math.floor(math.random() * 3), 3);
+    rand = math.floor(math.random() * 3 + 0.5);
     pixels[y-1][x - rand + 1] = math.max(1, pixels[y][x] - bit.band(1, rand));
 end
 
